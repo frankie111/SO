@@ -1,0 +1,7 @@
+1. tree L2
+2. cp -R abc zz
+3. chmod -wx dir && touch dir/file.txt ( can't do it )
+4. chmod -R o+rw abc/t && chmod -R o+r abc/t1 abc/t2 abc/t3 abc/x abc/y && chmod o-rw abc/t/*
+5. ll abc/t
+6. cp /dev/zero /dev/null & && ps -ef | grep "cp /dev/zero /dev/null" && killall -q cp /dev/zero /dev/null
+7. mkdir tt/c && ln -s abc tt/c
