@@ -21,8 +21,24 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
+    // Read the radius from the fifo
+    float radius;
+    read(fifo_fd, &radius, sizeof(radius));
+
+    // Compute length and area
+    float PI = 3.14f;
+    float length = 2 * PI * radius;
+    float area = PI * radius * radius;
+
     // Close the FIFO for reading
     close(fifo_fd);
+
+    // Create result string
+    char result[100];
+    sprintf(result, "Lange: %f \nFlacheninhalt: %f", length, area);
+
+    // Write the result to the console
+    printf("%s\n", result);
 
     // Open the FIFO for writing
     fifo_fd = open(FIFO_PATH, O_WRONLY);
@@ -30,6 +46,9 @@ int main() {
         perror("Failed to open FIFO");
         exit(EXIT_FAILURE);
     }
+
+    // Write the result to the FIFO
+    write(fifo_fd, result, sizeof(result));
 
     // Close the FIFO for writing
     close(fifo_fd);
